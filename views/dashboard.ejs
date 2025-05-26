@@ -1,0 +1,27 @@
+<h2>Your Notes</h2>
+
+<form method="POST" action="/note">
+  <div>
+    Title: <input name="title" required><br>
+    Content:<br>
+    <textarea name="content" rows="4" cols="50" required></textarea><br>
+    <button type="submit">Add Note</button>
+  </div>
+</form>
+
+<hr>
+
+<div>
+  <% notes.forEach(note => { %>
+    <div style="border: 2px solid #000; padding: 10px; margin: 10px; display: inline-block; width: 250px; vertical-align: top;">
+      <strong><%= note.title %></strong><br>
+      <p><%= note.content %></p>
+      <small>Created at: <%= new Date(note.createdAt).toLocaleString() %></small>
+      <form method="POST" action="/note/delete/<%= note._id %>">
+        <button type="submit">Delete</button>
+      </form>
+    </div>
+  <% }) %>
+</div>
+
+<a href="/logout">Logout</a>
